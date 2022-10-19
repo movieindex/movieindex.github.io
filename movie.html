@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MovieIndex</title>
+
+        <link rel="stylesheet" href="css/materialize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="index.html" class="brand-logo">MovieIndex</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="movie-backdrop">
+            <img id="backdrop" src="">
+            <div class="movie-backdrop-info">
+                <p id="tagline"></p>
+                <h1 class="movie-backdrop-title" id="title"></h1>
+                <p><span id="release"></span> &bull; <span id="genres"></span> &bull; <span id="runtime"></span></p>
+                <h3><i class="small material-icons">star</i> <span id="rating"></span></h3>
+                <p>(<span id="vote-count"></span>)</p>
+            </div>
+            <div class="movie-backdrop-view">
+                <a class="waves-effect waves-light btn-large" id="imdb" target="_blank">IMDB</a>
+                <a class="waves-effect waves-light btn-large" id="themoviedb" target="_blank">TheMovieDB</a>
+            </div>
+        </div>
+        <br>
+
+        <center style="margin-left: -15px;">
+            <h5 style="width: 60%;" id="overview"></h5>
+
+            <br>
+
+            <div id="featured"></div>
+
+            <br>
+
+            <div class="info-card card-panel grey darken-3">
+                <p style="font-size: 20px;">
+                    <b>Status:</b> <span id="status"></span>
+                    <br><br>
+                    <b>Budget:</b> <span id="budget"></span>
+                    <br><br>
+                    <b>Revenue:</b> <span id="revenue"></span>
+                    <br><br>
+                    <b>Website:</b> <span id="website"></span>
+                </p>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs grey darken-3" id="castcrew-tabs">
+                    <li class="tab col s6"><a class="active" href="#cast-container">Cast</a></li>
+                    <li class="tab col s6"><a href="#crew-container">Crew</a></li>
+                    </ul>
+                </div>
+                <br><br>
+                <div id="cast-container">
+                    <h1>Cast</h1>
+                    <div id="cast"></div>
+                </div>
+                <div id="crew-container">
+                    <h1>Crew</h1>
+                    <div id="crew"></div>
+                </div>
+            </div>
+
+            <br>
+
+            <ul class="collapsible popout" id="videos"></ul>
+
+            <br>
+
+            <h1>Recommended</h1>
+
+            <div id="recommended"></div>
+
+            <h1>Similar</h1>
+            
+            <div id="similar"></div>
+
+            <br><br><br>
+        </center> 
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/materialize.min.js"></script>
+        <script src="js/axios.min.js"></script>
+        <script src="js/all.js"></script>
+        <script src="js/movie.js"></script>
+    </body>
+</html>

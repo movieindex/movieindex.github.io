@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MovieIndex</title>
+
+        <link rel="stylesheet" href="css/materialize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="index.html" class="brand-logo">MovieIndex</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    
+                </ul>
+            </div>
+        </nav>
+        
+        <center>
+            <h1>Trending</h1>
+
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs grey darken-3" id="trending-tabs">
+                    <li class="tab col s6"><a class="active" href="#trending-day">Today</a></li>
+                    <li class="tab col s6"><a href="#trending-week">This week</a></li>
+                    </ul>
+                </div>
+                <br><br>
+                <div id="trending-day"></div>
+                <div id="trending-week"></div>
+            </div>
+        </center>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/materialize.min.js"></script>
+        <script src="js/axios.min.js"></script>
+        <script src="js/all.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
