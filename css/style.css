@@ -1,0 +1,92 @@
+body {
+    background-color: #202020;
+    color: #fff;
+    margin-left: 15px;
+}
+
+nav {
+    margin-left: -15px;
+    width: calc(100% + 15px);
+}
+
+.brand-logo {
+    margin-left: 15px;
+}
+
+#trending {
+    display: inline-block;
+}
+
+.movie-card {
+    display: inline-block;
+    width: 15vw;
+    margin-right: 15px;
+    color: #fff;
+}
+
+.movie-card-small {
+    width: 7vw;
+}
+
+.movie-card-medium {
+    width: 12vw;
+}
+
+.movie-card .card {
+    z-index: -2;
+}
+
+.movie-card .card-image {
+    box-shadow: inset 0px 0px 20px #000;
+}
+
+.movie-card .card-image img {
+    z-index: -1;
+    position: relative;
+}
+
+.movie-card-title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.movie-card .job {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.movie-backdrop {
+    position: relative;
+}
+
+.movie-backdrop img {
+    margin-left: -15px;
+    width: calc(100% + 15px);
+    height: 70vh;
+    object-fit: cover;
+}
+
+.movie-backdrop-title {
+    margin-top: 0px;
+}
+
+.movie-backdrop-info {
+    z-index: 999;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    text-shadow: 0px 0px 2px #000, 0px 0px 8px #000, 0px 0px 8px #000, 0px 0px 8px #000;
+}
+
+.movie-backdrop-view {
+    z-index: 999;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.info-card {
+    width: 50%;
+}
