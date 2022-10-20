@@ -24,7 +24,7 @@
         <div class="navbar">
             <nav class="grey darken-4">
                 <div class="nav-wrapper">
-                    <form class="grey darken-3" action="search.html">
+                    <form class="grey darken-3">
                         <div class="input-field">
                             <input style="padding-left: 15px !important; padding-right: 4rem !important;" id="search" name="q" type="search" placeholder="Search..." required>
                         </div>
@@ -35,27 +35,26 @@
         
         <center>
             <br><br>
-            <div id="search-preview"></div>
 
-            <h1>Trending</h1>
+            <a class="waves-effect waves-light btn search-imdb" target="_blank"><i class="material-icons left">search</i>Search on IMDB</a>
+            <a class="waves-effect waves-light btn search-themoviedb" target="_blank"><i class="material-icons left">search</i>Search on TheMovieDB</a>
+            
+            <br><br>
 
-            <div class="row">
-                <div class="col s12">
-                    <ul class="tabs grey darken-3" id="trending-tabs">
-                    <li class="tab col s6"><a class="active" href="#trending-day">Today</a></li>
-                    <li class="tab col s6"><a href="#trending-week">This week</a></li>
-                    </ul>
-                </div>
-                <br><br>
-                <div id="trending-day"></div>
-                <div id="trending-week"></div>
-            </div>
+            <div id="search-results"></div>
+
+            <br><br>
+
+            <a class="waves-effect waves-light btn search-imdb" target="_blank"><i class="material-icons left">search</i>Search on IMDB</a>
+            <a class="waves-effect waves-light btn search-themoviedb" target="_blank"><i class="material-icons left">search</i>Search on TheMovieDB</a>
+        
+            <br><br><br><br>
         </center>
 
         <script src="js/jquery.min.js"></script>
         <script src="js/materialize.min.js"></script>
         <script src="js/axios.min.js"></script>
         <script src="js/all.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/search.js"></script>
     </body>
 </html>

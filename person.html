@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="css/materialize.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="css/style.css">
-
+        
         <link rel="icon" href="img/icon.png">
     </head>
     <body>
@@ -24,7 +24,7 @@
         <div class="navbar">
             <nav class="grey darken-4">
                 <div class="nav-wrapper">
-                    <form class="grey darken-3" action="search.html">
+                    <form class="grey darken-3">
                         <div class="input-field">
                             <input style="padding-left: 15px !important; padding-right: 4rem !important;" id="search" name="q" type="search" placeholder="Search..." required>
                         </div>
@@ -33,29 +33,51 @@
             </nav>
         </div>
         
-        <center>
-            <br><br>
-            <div id="search-preview"></div>
+        <div class="movie-backdrop" style="height: 500px;">
+            <img class="person-profile col s1" id="profile">
+            <div class="movie-backdrop-info person">
+                <h1 class="movie-backdrop-title" id="name"></h1>
+                <p><span id="born"></span> &bull; <span id="gender"></span> &bull; <span id="department"></span></p>
+            </div>
+            <div class="movie-backdrop-view">
+                <a class="waves-effect waves-light btn-large" id="imdb" target="_blank">IMDB</a>
+                <a class="waves-effect waves-light btn-large" id="themoviedb" target="_blank">TheMovieDB</a>
+            </div>
+        </div>
+        <br>
 
-            <h1>Trending</h1>
+        <center style="margin-left: -15px;">
+            <h5 style="width: 60%;" id="overview"></h5>
+
+            <br>
+
+            <h1>Filmography</h1>
+
+            <br>
 
             <div class="row">
                 <div class="col s12">
-                    <ul class="tabs grey darken-3" id="trending-tabs">
-                    <li class="tab col s6"><a class="active" href="#trending-day">Today</a></li>
-                    <li class="tab col s6"><a href="#trending-week">This week</a></li>
+                    <ul class="tabs grey darken-3" id="castcrew-tabs">
+                    <li class="tab col s6"><a class="active" href="#cast-container">Cast</a></li>
+                    <li class="tab col s6"><a href="#crew-container">Crew</a></li>
                     </ul>
                 </div>
                 <br><br>
-                <div id="trending-day"></div>
-                <div id="trending-week"></div>
+                <div id="cast-container">
+                    <h4>Cast</h4>
+                    <div id="filmography-cast"></div>
+                </div>
+                <div id="crew-container">
+                    <h4>Crew</h1>
+                    <div id="filmography-crew"></div>
+                </div>
             </div>
-        </center>
+        </center> 
 
         <script src="js/jquery.min.js"></script>
         <script src="js/materialize.min.js"></script>
         <script src="js/axios.min.js"></script>
         <script src="js/all.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/person.js"></script>
     </body>
 </html>
