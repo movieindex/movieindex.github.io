@@ -4,17 +4,24 @@ if (!params.hasOwnProperty("id")){
 
 axios({
     method: "GET",
-    url: `https://api.themoviedb.org/3/movie/${params.id}?api_key=${API_KEY}&language=en-US`
+    url: `https://api.themoviedb.org/3/tv/${params.id}?api_key=${API_KEY}&language=en-US&append_to_response=episode_groups`
 }).then((response) => {
     let data = response.data
 
     document.querySelector("#backdrop").src = `https://www.themoviedb.org/t/p/original/${data.backdrop_path}`
     document.querySelector("#tagline").innerHTML = data.tagline
-    document.querySelector("#title").innerHTML = data.title
-    document.querySelector("#release").innerHTML = data.release_date
+    document.querySelector("#title").innerHTML = data.name
+    document.querySelector("#release").innerHTML = `${data.first_air_date} - ${data.last_air_date}`
 
-    document.querySelector("#imdb").href = `https://www.imdb.com/title/${data.imdb_id}`
-    document.querySelector("#themoviedb").href = `https://www.themoviedb.org/movie/${params.id}`
+    axios({
+        method: "GET",
+        url: `https://api.themoviedb.org/3/tv/${params.id}/external_ids?api_key=${API_KEY}&language=en-US`
+    }).then((response) => {
+        let data = response.data
+
+        document.querySelector("#imdb").href = `https://www.imdb.com/title/${data.imdb_id}`
+        document.querySelector("#themoviedb").href = `https://www.themoviedb.org/tv/${params.id}`
+    })
 
     let genres = []
 
@@ -24,21 +31,25 @@ axios({
 
     document.querySelector("#genres").innerHTML = genres.join(", ")
 
-    let hours = Math.floor(data.runtime / 60)
-    let minutes = Math.floor(data.runtime % 60)
+    if (data.episode_run_time.length !== 0){
+        let hours = Math.floor(data.episode_run_time[0] / 60)
+        let minutes = Math.floor(data.episode_run_time[0] % 60)
 
-    let hoursCaption = "hours"
-    if (hours == 1) hoursCaption = "hour"
+        let hoursCaption = "hours"
+        if (hours == 1) hoursCaption = "hour"
 
-    let minutesCaption = "minutes"
-    if (minutes == 1) minutesCaption = "minute"
+        let minutesCaption = "minutes"
+        if (minutes == 1) minutesCaption = "minute"
 
-    if (minutes != 0 && hours != 0){
-        document.querySelector("#runtime").innerHTML = `${hours} ${hoursCaption} and ${minutes} ${minutesCaption}`
-    } else if (hours != 0 && minutes == 0) {
-        document.querySelector("#runtime").innerHTML = `${hours} ${hoursCaption}`
-    } else if (minutes != 0 && hours == 0){
-        document.querySelector("#runtime").innerHTML = `${minutes} ${minutesCaption}`
+        if (minutes != 0 && hours != 0){
+            document.querySelector("#runtime").innerHTML = `${hours} ${hoursCaption} and ${minutes} ${minutesCaption}`
+        } else if (hours != 0 && minutes == 0) {
+            document.querySelector("#runtime").innerHTML = `${hours} ${hoursCaption}`
+        } else if (minutes != 0 && hours == 0){
+            document.querySelector("#runtime").innerHTML = `${minutes} ${minutesCaption}`
+        }
+    } else {
+        document.querySelector("#runtime").innerHTML = "Unknown Runtime"
     }
 
     document.querySelector("#rating").innerHTML = Math.round(data.vote_average * 10) / 10
@@ -51,7 +62,7 @@ axios({
 
     axios({
         method: "GET",
-        url: `https://api.themoviedb.org/3/movie/${params.id}/credits?api_key=${API_KEY}&language=en-US`
+        url: `https://api.themoviedb.org/3/tv/${params.id}/credits?api_key=${API_KEY}&language=en-US`
     }).then((response) => {
         let data = response.data
 
@@ -106,13 +117,63 @@ axios({
             </a>
             `
         })
-
-        $(".tooltipped").tooltip()
     })
+
+    data.seasons.forEach((season) => {
+        document.querySelector("#seasons").innerHTML += `
+        <li>
+            <div class="collapsible-header grey darken-3"><i class="material-icons">playlist_play</i>${season.name}</div>
+            <div class="collapsible-body season-episode" id="season-${season.id}"></div>
+        </li>
+        `
+
+        axios({
+            method: "GET",
+            url: `https://api.themoviedb.org/3/tv/${params.id}/season/${season.season_number}?api_key=${API_KEY}&language=en-US`
+        }).then((response) => {
+            let data = response.data
+
+            console.log(data)
+
+            data.episodes.forEach((episode) => {
+                let runtime = "Unknown Runtime"
+
+                let hours = Math.floor(episode.runtime / 60)
+                let minutes = Math.floor(episode.runtime % 60)
+        
+                let hoursCaption = "hours"
+                if (hours == 1) hoursCaption = "hour"
+        
+                let minutesCaption = "minutes"
+                if (minutes == 1) minutesCaption = "minute"
+        
+                if (minutes != 0 && hours != 0){
+                    runtime = `${hours} ${hoursCaption} and ${minutes} ${minutesCaption}`
+                } else if (hours != 0 && minutes == 0) {
+                    runtime = `${hours} ${hoursCaption}`
+                } else if (minutes != 0 && hours == 0){
+                    runtime = `${minutes} ${minutesCaption}`
+                }
+
+                document.querySelector(`#season-${data.id}`).innerHTML += `
+                <img class="episode-still" onerror="this.src = 'img/still.png'" src="https://www.themoviedb.org/t/p/original/${episode.still_path}">
+                <div class="episode-info">
+                    <h3>${episode.episode_number}. ${episode.name}</h3>
+                    <p>Aired ${episode.air_date} &bull; ${runtime}</p>
+                    <p>${episode.overview}</p>
+                    <p><i class="tiny material-icons">star</i> ${Math.round(episode.vote_average * 10) / 10}</p>
+                </div>
+                <br>
+                `
+            })
+        })
+    })
+
+    $("#seasons").collapsible()
 
     axios({
         method: "GET",
-        url: `https://api.themoviedb.org/3/movie/${params.id}/videos?api_key=${API_KEY}&language=en-US`
+        url: `https://api.themoviedb.org/3/tv/${params.id}/videos?api_key=${API_KEY}&language=en-US`
     }).then((response) => {
         let data = response.data
 
@@ -134,7 +195,7 @@ axios({
 
     axios({
         method: "GET",
-        url: `https://api.themoviedb.org/3/movie/${params.id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`
+        url: `https://api.themoviedb.org/3/tv/${params.id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`
     }).then((response) => {
         let data = response.data
 
@@ -164,7 +225,7 @@ axios({
 
     axios({
         method: "GET",
-        url: `https://api.themoviedb.org/3/movie/${params.id}/similar?api_key=${API_KEY}&language=en-US&page=1`
+        url: `https://api.themoviedb.org/3/tv/${params.id}/similar?api_key=${API_KEY}&language=en-US&page=1`
     }).then((response) => {
         let data = response.data
 
