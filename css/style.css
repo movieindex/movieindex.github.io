@@ -2,11 +2,17 @@ body {
     background-color: #202020;
     color: #fff;
     margin-left: 15px;
+    overflow-x: hidden;
 }
 
 nav {
     margin-left: -15px;
     width: calc(100% + 15px);
+    z-index: 999;
+}
+
+.material-tooltip {
+    z-index: 100 !important;
 }
 
 .brand-logo {
@@ -45,13 +51,7 @@ nav {
     position: relative;
 }
 
-.movie-card-title {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.movie-card .job {
+.movie-card-title, .movie-card .job, .text-overflow {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -73,20 +73,58 @@ nav {
 }
 
 .movie-backdrop-info {
-    z-index: 999;
+    z-index: 10;
     position: absolute;
     bottom: 15px;
     left: 15px;
     text-shadow: 0px 0px 2px #000, 0px 0px 8px #000, 0px 0px 8px #000, 0px 0px 8px #000;
 }
 
+.movie-backdrop-info.person {
+    left: 330px;
+}
+
 .movie-backdrop-view {
-    z-index: 999;
+    z-index: 10;
     position: absolute;
-    bottom: 15px;
+    bottom: 30px;
     right: 15px;
 }
 
 .info-card {
+    width: 50%;
+}
+
+#search {
+    color: #fff !important;
+}
+
+#search:focus {
+    color: #000 !important;
+}
+
+.person-profile {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    height: auto !important;
+    width: 300px !important;
+}
+
+.season-episode {
+    text-align: left;
+}
+
+.episode-still, .episode-info {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.episode-still {
+    width: 400px;
+}
+
+.episode-info {
+    margin-left: 15px;
     width: 50%;
 }
